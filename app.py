@@ -22,5 +22,13 @@ def predict():
     return render_template("index.html", prediction = prediction, email_text = email_text)
 
 
+# @app.route("/api/predict", methods = ["POST"])
+# def api_predict():
+    email_text = request.get_json(force=True)
+    tokenized_email = tokenizer.transform([email_text])
+    prediction = model.predict(tokenized_email)
+    prediction = 1 if prediction == 1 else -1
+
+
 if __name__ == "__main__":
     app.run(debug = True)
